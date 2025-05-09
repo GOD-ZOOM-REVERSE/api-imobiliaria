@@ -63,7 +63,7 @@ $ npm run test:cov
 #### Retorna todas as imobiliárias disponíveis ou filtrado
 
 ```http
-  GET /api/v1/imobiliaria/FindAll?minPreco=<min_preco_number>&maxPreco=<max_preco_number>&tipoImovel=<tipo_imóvel=['HOME', 'APARTMENT', 'KITNET']>
+  GET /api/v1/imobiliaria/FindAll
 ```
 
 | Query   | Tipo       | Descrição                                   |
@@ -93,7 +93,27 @@ Exemplo:
 
 ### Retorno da API - Sucesso (200)
 
-#### Exemplo de resposta para o endpoint `GET /api/v1/imobiliaria/FindAll`
+#### Exemplo de resposta para o endpoint `GET /api/v1/imobiliaria/FindAll
+
+```json
+[
+    {
+        "_id": "681d09b61c6446850cb16fe4",
+        "id": "cf8aee41-f497-4e14-8312-64ae8e696d12",
+        "title": "Imobiliaria #1",
+        "description": "Description #1",
+        "address": "Address #1",
+        "price": {
+            "$numberDecimal": "105.9"
+        },
+        "type": "HOME",
+        "createdAt": "2025-05-08T19:44:54.411Z",
+        "__v": 0
+    }
+]
+```
+
+#### Exemplo de resposta para o endpoint `POST /api/v1/imobiliaria`
 
 ```json
 [
@@ -111,19 +131,6 @@ Exemplo:
     "__v": 0
   }
 ]
-```
-
-#### Exemplo de resposta para o endpoint `POST /api/v1/imobiliaria`
-
-```json
-{
-  "id": "3",
-  "title": "Imobiliaria #3",
-  "description": "Description #3",
-  "address": "Address #3",
-  "price": 799.99,
-  "type": "HOME"
-}
 ```
 
 
