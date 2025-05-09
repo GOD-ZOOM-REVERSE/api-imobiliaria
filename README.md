@@ -228,6 +228,87 @@ $ docker-compose down
 
 Para acessar a documentação do swagger, acesse ```/api```
 
+### Adicionar n8n ao `docker-compose.yml`
+
+Se não tiver no docker-compose.yml
+
+Para incluir o n8n no `docker-compose.yml`, adicione o seguinte serviço:
+
+```yaml
+  traefik:
+    image: "traefik"
+    restart: always
+    command:
+      - "--api=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.mytlschallenge.acme.tlschallenge=true"
+      - "--certificatesresolvers.mytlschallenge.acme.email=${SSL_EMAIL}"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - traefik_data:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    restart: always
+    ports:
+      - "127.0.0.1:5678:5678"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.n8n.rule=Host(`${SUBDOMAIN}.${DOMAIN_NAME}`)
+      - traefik.http.routers.n8n.tls=true
+      - traefik.http.routers.n8n.entrypoints=web,websecure
+      - traefik.http.routers.n8n.tls.certresolver=mytlschallenge
+      - traefik.http.middlewares.n8n.headers.SSLRedirect=true
+      - traefik.http.middlewares.n8n.headers.STSSeconds=315360000
+      - traefik.http.middlewares.n8n.headers.browserXSSFilter=true
+      - traefik.http.middlewares.n8n.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.n8n.headers.forceSTSHeader=true
+      - traefik.http.middlewares.n8n.headers.SSLHost=${DOMAIN_NAME}
+      - traefik.http.middlewares.n8n.headers.STSIncludeSubdomains=true
+      - traefik.http.middlewares.n8n.headers.STSPreload=true
+      - traefik.http.routers.n8n.middlewares=n8n@docker
+    environment:
+      - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./local-files:/files
+
+volumes:
+  n8n_data:
+  traefik_data:
+```
+
+### Acessar o n8n
+
+Após executar `docker-compose up`, o n8n estará disponível em [http://localhost:5678](http://localhost:5678). Use as credenciais configuradas para acessar a interface.
+
+## Importar JSON do Workflow
+
+Para importar o JSON do workflow no n8n, siga os passos abaixo:
+
+1. Acesse a interface do n8n em [http://localhost:5678](http://localhost:5678).
+2. Faça login com suas credenciais.
+3. Clique no botão **Import** no canto superior direito da tela.
+4. Cole o conteúdo do arquivo JSON do workflow na área de texto ou selecione o arquivo JSON diretamente.
+5. Clique em **Import** para carregar o workflow.
+6. Após a importação, você poderá visualizar e editar o workflow na interface do n8n.
+
+Certifique-se de que o JSON do workflow está no formato correto para evitar erros durante a importação.
+
 ## Resources
 
 Confira alguns recursos que podem ser úteis ao trabalhar com o NestJS:
