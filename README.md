@@ -91,9 +91,40 @@ Exemplo:
 }
 ```
 
-#### add(num1, num2)
+### Retorno da API - Sucesso (200)
 
-Recebe dois números e retorna a sua soma.
+#### Exemplo de resposta para o endpoint `GET /api/v1/imobiliaria/FindAll`
+
+```json
+[
+  {
+    "id": "ee929849-8b3f-4762-b33b-ef8901864703",
+    "title": "Imobiliaria #5",
+    "description": "Description #5",
+    "address": "Address #5",
+    "price": {
+        "$numberDecimal": "399.99"
+    },
+    "type": "KITNET",
+    "_id": "681e1c18d5eac3c555a8b49e",
+    "createdAt": "2025-05-09T15:15:36.461Z",
+    "__v": 0
+  }
+]
+```
+
+#### Exemplo de resposta para o endpoint `POST /api/v1/imobiliaria`
+
+```json
+{
+  "id": "3",
+  "title": "Imobiliaria #3",
+  "description": "Description #3",
+  "address": "Address #3",
+  "price": 799.99,
+  "type": "HOME"
+}
+```
 
 
 ## Usando Docker
