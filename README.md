@@ -97,19 +97,32 @@ Exemplo:
 
 ```json
 [
-    {
-        "_id": "681d09b61c6446850cb16fe4",
-        "id": "cf8aee41-f497-4e14-8312-64ae8e696d12",
-        "title": "Imobiliaria #1",
-        "description": "Description #1",
-        "address": "Address #1",
-        "price": {
-            "$numberDecimal": "105.9"
-        },
-        "type": "HOME",
-        "createdAt": "2025-05-08T19:44:54.411Z",
-        "__v": 0
-    }
+  {
+    "_id": "681d09b61c6446850cb16fe4",
+    "id": "cf8aee41-f497-4e14-8312-64ae8e696d12",
+    "title": "Imobiliaria #1",
+    "description": "Description #1",
+    "address": "Address #1",
+    "price": {
+      "$numberDecimal": "105.9"
+    },
+    "type": "HOME",
+    "createdAt": "2025-05-08T19:44:54.411Z",
+    "__v": 0
+  }
+  {
+    "_id": "681d4af14763473c67708d9d",
+    "id": "3e05cbc5-c4b6-4317-8a8c-378c438467fc",
+    "title": "Imobiliaria #2",
+    "description": "Description #2",
+    "address": "Address #2",
+    "price": {
+      "$numberDecimal": "105.9"
+    },
+    "type": "APARTMENT",
+    "createdAt": "2025-05-09T00:23:13.120Z",
+    "__v": 0
+  },
 ]
 ```
 
