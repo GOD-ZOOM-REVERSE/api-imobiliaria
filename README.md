@@ -57,6 +57,36 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+
+## Documentação da API
+
+#### Retorna todos os itens
+
+```http
+  GET /api/items
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `api_key` | `string` | **Obrigatório**. A chave da sua API |
+
+#### Retorna um item
+
+```http
+  GET /api/v1/imobiliaria/FindAll?minPreco=<min_preco_number>&maxPreco=<max_preco_number>&tipoImovel=<tipo_imóvel=['HOME', 'APARTMENT', 'KITNET']>
+```
+
+| Query   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `minPreco`      | `number` | O valor mínimo que deseja, pode usar "." para adicionar os centavos. |
+| `maxPreco`      | `number` | O valor máximo que deseja, pode usar "." para adicionar os centavos. |
+| `tipoImovel`    | `string` | Os valores que deseja. Tem que ser um destes: ["HOME", "APARTMENT", "KITNET"] |
+
+#### add(num1, num2)
+
+Recebe dois números e retorna a sua soma.
+
+
 ## Usando Docker
 
 Certifique-se de ter o Docker instalado em sua máquina. Siga as instruções abaixo para construir e executar o projeto usando Docker.
