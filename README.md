@@ -60,17 +60,7 @@ $ npm run test:cov
 
 ## Documentação da API
 
-#### Retorna todos os itens
-
-```http
-  GET /api/items
-```
-
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `api_key` | `string` | **Obrigatório**. A chave da sua API |
-
-#### Retorna um item
+#### Retorna todas as imobiliárias disponíveis ou filtrado
 
 ```http
   GET /api/v1/imobiliaria/FindAll?minPreco=<min_preco_number>&maxPreco=<max_preco_number>&tipoImovel=<tipo_imóvel=['HOME', 'APARTMENT', 'KITNET']>
@@ -81,6 +71,25 @@ $ npm run test:cov
 | `minPreco`      | `number` | O valor mínimo que deseja, pode usar "." para adicionar os centavos. |
 | `maxPreco`      | `number` | O valor máximo que deseja, pode usar "." para adicionar os centavos. |
 | `tipoImovel`    | `string` | Os valores que deseja. Tem que ser um destes: ["HOME", "APARTMENT", "KITNET"] |
+
+### Cadastrar um imóvel
+
+```http
+  POST /api/v1/imobiliaria
+```
+
+dados a ser enviado ao body da requisição
+
+Exemplo:
+```json
+{
+    "title": "Imobiliaria #1",
+    "description": "Description #1",
+    "address": "Address #1",
+    "price": 399.99,
+    "type": "KITNET"
+}
+```
 
 #### add(num1, num2)
 
