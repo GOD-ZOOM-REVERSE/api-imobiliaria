@@ -134,6 +134,10 @@ A aplicação estará disponível em [http://localhost:3000](http://localhost:30
 $ docker-compose down
 ```
 
+## Swagger
+
+Para acessar a documentação do swagger, acesse ```/api```
+
 ## Resources
 
 Confira alguns recursos que podem ser úteis ao trabalhar com o NestJS:
