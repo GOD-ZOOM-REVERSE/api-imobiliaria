@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Query, Res } from '@nestjs/common';
 import { ImobiliariasService } from '../Services/imobiliaria.service';
 import { CreateImobiliariaDto } from '../Data/DTOs/create-imobiliaria.dto';
-import { ImobiliariaFilterDto } from 'src/Data/DTOs/filter-imobiliaria.dto';
+import { ImobiliariaFilterDto } from '../Data/DTOs/filter-imobiliaria.dto';
 
 @Controller('api/v1/imobiliaria')
 export class ImobiliariaController {

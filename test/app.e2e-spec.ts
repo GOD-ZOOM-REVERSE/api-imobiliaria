@@ -17,9 +17,40 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
+    return request(app.getHttpServer() ?? "http://localhost:3000")
       .get('/')
       .expect(200)
       .expect('Hello World!');
+  });
+
+  it('/ (GET /api/v1/imobiliaria/FindAll) Tudo', () => {
+    return request(app.getHttpServer() ?? "http://localhost:3000")
+      .get('/api/v1/imobiliaria/FindAll')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(Array.isArray(res.body)).toBe(true);
+      });
+  })
+  
+  it('/ (POST /api/v1/imobiliaria) Criar', () => {
+    return request(app.getHttpServer() ?? "http://localhost:3000")
+      .post('/api/v1/imobiliaria')
+      .send({
+        title: 'Imobiliaria Teste',
+        description: 'Testando legal',
+        address: 'Rua Teste, 123',
+        price: 399.99,
+        type: "HOME",
+      })
+      .expect(201)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(res.body._id).toBeDefined();
+        expect(res.body.title).toBe('Imobiliaria Teste');
+        expect(res.body.address).toBe('Rua Teste, 123');
+        expect(res.body.price.$numberDecimal).toBe('399.99');
+        expect(res.body.type).toBe('HOME');
+      });
   });
 });
