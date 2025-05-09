@@ -5,7 +5,7 @@ services:
     ports:
       - 27017:27017
   imobiliaria:
-    image: "mauricio2021/process-seletive-nest:0.1.0"
+    image: "mauricio2021/imobiliaria-nest:0.1.0"
     restart: always
     build:
       context: .
